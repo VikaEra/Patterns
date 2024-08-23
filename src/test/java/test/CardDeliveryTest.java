@@ -30,8 +30,6 @@ class CardDeliveryTest {
         var firstMeetingDate = DataGenerator.generateDate(daysToAddForFirstMeeting);
         var daysToAddForSecondMeeting = 7;
         var secondMeetingDate = DataGenerator.generateDate(daysToAddForSecondMeeting);
-        $(byText("Запланировать")).click();
-        $(byText("Успешно!")).shouldBe(visible, Duration.ofSeconds(15));
         $("[data-test-id='city'] .input__control").setValue(validUser.getCity());
         $("[data-test-id='date'] .input__control")
                 .sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
@@ -39,7 +37,8 @@ class CardDeliveryTest {
         $("[data-test-id='name'] .input__control").setValue(validUser.getName());
         $("[data-test-id='phone'] .input__control").setValue(validUser.getPhone());
         $("[data-test-id='agreement']").click();
-        $(".button").click();
+        $(byText("Запланировать")).click();
+        $(byText("Успешно!")).shouldBe(visible, Duration.ofSeconds(15));
         $("[data-test-id='success-notification'] .notification__content")
                 .shouldHave(exactText("Встреча успешно запланирована на " + firstMeetingDate))
                 .shouldBe(visible);
